@@ -18,7 +18,6 @@ if [ -z "$USER_PUBLIC_KEY" ]; then
     exit 1
 fi
 
-
 if ! id "$USER_NAME" &>/dev/null; then
     useradd -m -s /bin/bash "$USER_NAME"
 fi
@@ -27,13 +26,14 @@ chmod 0440 /etc/sudoers.d/$USER_NAME
 
 mkdir -p "$HOME_DIR/.ssh"
 chmod 700 "$HOME_DIR/.ssh"
-chown -R "$USER_NAME:$USER_NAME" "$HOME_DIR/.ssh"
 
 echo "$USER_PUBLIC_KEY" >> "$HOME_DIR/.ssh/authorized_keys"
+chmod 600 "$HOME_DIR/.ssh/authorized_keys"
+
 # NOTE: Clean up duplicates for every 'vagrant provision'
 sort -u "$HOME_DIR/.ssh/authorized_keys" -o "$HOME_DIR/.ssh/authorized_keys"
-chmod 600 "$HOME_DIR/.ssh/authorized_keys"
-chown -R "$USER_NAME:$USER_NAME" "$HOME_DIR/.ssh/authorized_keys"
+
+chown -R "$USER_NAME:$USER_NAME" "$HOME_DIR/.ssh"
 
 echo -e "${GREEN}Developer key injected on VM.${NC}"
 
