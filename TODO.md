@@ -25,3 +25,7 @@ DISABLE_HTTP_GIT = true
 ## Docs
 
 - [ ] update README.md to reflect the repo's current state
+
+# Devops
+
+- [ ] run `ansible-lint` on playbooks on before push hooks

@@ -14,23 +14,41 @@ You should install VirtualBox, Vagrant and Ansible.
 
 To test the environment run:
 
-```shell
+```bash
 vboxmanage --version
-vagrant --version`
+vagrant --version
 ```
 
 Or, more directly:
 
-```shell
+```bash
 vagrant up
 ```
 
 ## Debug
 
-To debug the VM just hop in it running:
+- To debug the VM just hop in it running:
 
-```shell
+```bash
 vagrant ssh
+```
+
+- To debug that Ansible can access the Vagrant Box:
+
+```bash
+ansible all -i hosts.yml -m ping
+```
+
+- To run a specific playbook:
+
+```bash
+ansible-playbook -i hosts.yml ../vps/install/docker.yml
+```
+
+- To run a some command inside it:
+
+```bash
+ansible all -i hosts.yml -m shell -a "docker --version && docker compose version"
 ```
 
 ### Errors
