@@ -21,3 +21,7 @@
 [repository]
 DISABLE_HTTP_GIT = true
 ```
+
+## Docs
+
+- [ ] update README.md to reflect the repo's current state

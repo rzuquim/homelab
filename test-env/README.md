@@ -24,3 +24,11 @@ Or, more directly:
 ```shell
 vagrant up
 ```
+
+## Debug
+
+To debug the VM just hop in it running:
+
+```shell
+vagrant ssh
+```
