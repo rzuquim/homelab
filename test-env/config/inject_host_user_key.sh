@@ -18,6 +18,12 @@ if [ -z "$USER_PUBLIC_KEY" ]; then
     exit 1
 fi
 
+# NOTE: installing basic tools
+apt-get update && apt-get install -y \
+    python3 \
+    sudo \
+    curl
+
 if ! id "$USER_NAME" &>/dev/null; then
     useradd -m -s /bin/bash "$USER_NAME"
 fi

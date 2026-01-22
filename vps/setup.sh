@@ -40,8 +40,10 @@ apt-get update && apt-get install -y \
     sudo \
     curl
 
+# TODO: move to homelab.rzuquim.com/ansible_pub_key
+ANSIBLE_PUB_KEY_URL=https://raw.githubusercontent.com/rzuquim/homelab/refs/heads/main/vps/ansible_key.pub
 ANSIBLE_USER=ansible
-ANSIBLE_PUB_KEY=$(curl -s "vpn.rzuquim.com/ansible_pub_key")
+ANSIBLE_PUB_KEY=$(curl -s "$ANSIBLE_PUB_KEY_URL")
 create_user "$ANSIBLE_USER" "$ANSIBLE_PUB_KEY"
 
 echo -e "${GREEN}Ansible user setup complete.${NC}"
