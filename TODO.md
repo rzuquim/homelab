@@ -13,6 +13,7 @@
 
 ## Security
 
+- [ ] ufw rules
 - [ ] ansible with `(ALL) NOPASSWD: ALL` on sudoers does not seem the secure way to implement this
 - [ ] gitea using the host's SSH daemon (sshd)
 - [x] on tests, disable shared folders with `VAGRANT_DISABLE_VBOXSYMLINKCREATE=1`
