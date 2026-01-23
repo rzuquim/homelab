@@ -14,7 +14,7 @@ function create_user() {
 
     if id "$USER_NAME" &>/dev/null; then
         echo -e "${YELLOW}WARN: user $USER_NAME already exists!${NC}"
-        return 1
+        return 0
     fi
 
     useradd -m -s /bin/bash "$USER_NAME"
