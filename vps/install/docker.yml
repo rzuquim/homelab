@@ -1,10 +1,10 @@
 ---
-- name: Install Docker and Docker Compose
+- name: Install Docker
   hosts: all
-  become: yes # Runs tasks as root using sudo
+  become: yes
 
   tasks:
-    - name: Install required system packages
+    - name: Install prerequisite packages
       apt:
         pkg:
           - ca-certificates
@@ -19,19 +19,23 @@
         state: directory
         mode: "0755"
 
-    - name: Add Docker official GPG key
-      apt_key:
+    - name: Download Docker official GPG key
+      get_url:
         url: https://download.docker.com/linux/debian/gpg
-        state: present
-        keyring: /etc/apt/keyrings/docker.gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: "0644"
 
-    - name: Add Docker repository
-      apt_repository:
-        repo:
-          "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian {{
-          ansible_facts['distribution_release'] }} stable"
+    - name: Add Docker repository to apt sources (DEB822 format)
+      ansible.builtin.deb822_repository:
+        name: docker
+        types: [deb]
+        uris: https://download.docker.com/linux/debian
+        suites: ["{{ ansible_facts['distribution_release'] }}"]
+        components: [stable]
+        signed_by: /etc/apt/keyrings/docker.asc
         state: present
-        filename: docker-ce
+        enabled: yes
+      register: docker_repo_added
 
     - name: Install Docker Engine and plugins
       apt:
@@ -44,7 +48,7 @@
         state: present
         update_cache: yes
 
-    - name: Ensure docker service is running and enabled
+    - name: Ensure docker service is started and enabled
       service:
         name: docker
         state: started
