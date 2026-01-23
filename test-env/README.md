@@ -6,8 +6,29 @@ servers.
 > [!IMPORTANT]  
 > The rationale over the tools choices can be [found here](../docs/local_tests.md).
 
+## 🖇️ Playbook Dependency Mapping
 
+We use a numeric prefix system to link tests to specific Ansible playbooks.
 
+The first two digits of the file name on the `./tests/` foder determine which playbook must run before the test
+executes. On the very beginning of the main `./tests.sh` script there is a map from the number to the script path.
+
+| Prefix | Playbook Mapping          | Purpose                                                  |
+| ------ | ------------------------- | -------------------------------------------------------- |
+| 00xx   | None                      | Base OS / Infrastructure verification (runs on raw box). |
+| 01xx   | ../vps/install/docker.yml | Verifies Docker installation and daemon state.           |
+| 02xx   | ../vps/install/gittea.yml | Verifies Gitea installation.                             |
+
+## 🏗️ Setup
+
+To run the environment you must install VirtualBox, Vagrant and Ansible. To run the tests we use Molecule, the Ansible
+test runner.
+
+```bash
+pacman -Syu virtualbox ansible molecule
+```
+
+> You will probably need to reboot the machine for the VirtualBox Kernel module to load.
 
 To test the environment run:
 

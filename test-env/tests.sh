@@ -1,18 +1,22 @@
 #!/bin/bash
 
-set -euo pipefail
+set -eo pipefail
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-VIOLET="\e[38;2;238;130;238m"
-NC='\033[0m' # No Color
+for f in ./util/*.sh; do
+    source "$f";
+done
 
 TEST_BOX_NAME="test"
 TESTS_DIR="./tests"
 RESULT=0
 
 export ANSIBLE_HOST_KEY_CHECKING=False
+
+declare -A PLAYBOOK_RUN_HISTORY=()
+declare -A PLAYBOOK_MAP=( \
+    ["01"]="../vps/install/docker.yml" \
+    ["02"]="../vps/install/gitea.yml" \
+)
 
 # =====================================================
 echo -e "${VIOLET}🚀 Starting Test Environment...${NC}"
@@ -41,8 +45,15 @@ set +e
 
 for test_path in "${tests[@]}"; do
     test_name=$(basename "$test_path")
-    echo -ne "\t$test_name${NC}... "
 
+    if depends_on_playbook "$test_name"; then  
+        run_playbook "$test_name" || {
+            echo -e "${RED}❌ Playbook failed. Aborting.${NC}"
+            exit 1 
+        }
+    fi
+
+    echo -ne "\t$test_name${NC}... "
     vagrant upload "$test_path" "/tmp/$test_name" $TEST_BOX_NAME > /dev/null
     
     test_output=$(vagrant ssh $TEST_BOX_NAME -c "chmod +x /tmp/$test_name && /tmp/$test_name" 2>&1)

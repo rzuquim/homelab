@@ -27,6 +27,11 @@ DISABLE_HTTP_GIT = true
 
 - [ ] update README.md to reflect the repo's current state
 
-# Devops
+## Devops
 
 - [ ] run `ansible-lint` on playbooks on before push hooks
+- [ ] install a ansible LSP
+
+## Tests
+
+- [ ] why do tests calling `docker` needs `sudo` if the `ansible` user is on the `docker` group
