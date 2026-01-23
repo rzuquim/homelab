@@ -1,3 +1,5 @@
+ENV['VAGRANT_DISABLE_VBOXSYMLINKCREATE'] = '1'
+
 # NOTE: We should use the `sandbox` node to play and isolate the `test` node to run the script tests
 nodes = {
   "sandbox" => { 
