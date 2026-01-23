@@ -3,12 +3,12 @@ ENV['VAGRANT_DISABLE_VBOXSYMLINKCREATE'] = '1'
 # NOTE: We should use the `sandbox` node to play and isolate the `test` node to run the script tests
 nodes = {
   "sandbox" => { 
-    "ip" => "192.168.56.69", 
+    "ip" => "192.168.56.10", 
     "mem" => "2048", 
     "cpus" => 2 
   },
   "test" => { 
-    "ip" => "192.168.56.70", 
+    "ip" => "192.168.56.20", 
     "mem" => "1024", 
     "cpus" => 1 
   }

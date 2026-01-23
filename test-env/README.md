@@ -1,4 +1,4 @@
-# Tests
+# 🧪 Tests
 
 This folder includes how to test the scripts and Ansible playbooks locally before running them against production
 servers.
@@ -6,11 +6,8 @@ servers.
 > [!IMPORTANT]  
 > The rationale over the tools choices can be [found here](../docs/local_tests.md).
 
-## Setup
 
-You should install VirtualBox, Vagrant and Ansible.
 
-> You will probably need to reboot the machine for the Vitual Box Kernel module to load.
 
 To test the environment run:
 
@@ -19,36 +16,40 @@ vboxmanage --version
 vagrant --version
 ```
 
-Or, more directly:
+To execute the tests run:
 
 ```bash
-vagrant up
+tests.sh
 ```
 
-## Debug
+## 🐞 Manual tests and debug
+
+```bash
+vagrant up sandbox
+```
 
 - To debug the VM just hop in it running:
 
 ```bash
-vagrant ssh
+vagrant ssh sandbox
 ```
 
 - To debug that Ansible can access the Vagrant Box:
 
 ```bash
-ansible all -m ping
+ansible sandbox -m ping
 ```
 
 - To run a specific playbook:
 
 ```bash
-ansible-playbook ../vps/install/docker.yml
+ansible-playbook ../vps/install/docker.yml --limit sandbox
 ```
 
 - To run a some command inside it:
 
 ```bash
-ansible all -m shell -a "docker --version && docker compose version"
+ansible sandbox -m shell -a "docker --version && docker compose version"
 ```
 
 ### Errors

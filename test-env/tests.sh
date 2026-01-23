@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -10,6 +12,8 @@ TEST_BOX_NAME="test"
 TESTS_DIR="./tests"
 RESULT=0
 
+export ANSIBLE_HOST_KEY_CHECKING=False
+
 # =====================================================
 echo -e "${VIOLET}🚀 Starting Test Environment...${NC}"
 # =====================================================
@@ -17,6 +21,9 @@ echo -e "${VIOLET}🚀 Starting Test Environment...${NC}"
 # Ensure a clean environment by destroying any existing box first
 vagrant destroy -f $TEST_BOX_NAME > /dev/null 2>&1
 vagrant up $TEST_BOX_NAME
+
+ansible test -m ping
+echo -e "${GREEN}✅${NC} Test environt READY!"
 
 # =====================================================
 echo -e "${VIOLET}🧪 Running Tests...${NC}"
