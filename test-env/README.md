@@ -36,19 +36,19 @@ vagrant ssh
 - To debug that Ansible can access the Vagrant Box:
 
 ```bash
-ansible all -i hosts.yml -m ping
+ansible all -m ping
 ```
 
 - To run a specific playbook:
 
 ```bash
-ansible-playbook -i hosts.yml ../vps/install/docker.yml
+ansible-playbook ../vps/install/docker.yml
 ```
 
 - To run a some command inside it:
 
 ```bash
-ansible all -i hosts.yml -m shell -a "docker --version && docker compose version"
+ansible all -m shell -a "docker --version && docker compose version"
 ```
 
 ### Errors
