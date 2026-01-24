@@ -51,7 +51,7 @@ host-level configuration changes.
 To keep the project lightweight and avoid the overhead of heavy testing frameworks, we use a custom Bash-based Test
 Runner. How it Works:
 
-Tests are located in the `../test-env/tests/`. Each test is a standalone shell script that returns 0 on success or 1 on
+Tests are located in the `../test/tests/`. Each test is a standalone shell script that returns 0 on success or 1 on
 failure.
 
 ### Why this approach?

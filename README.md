@@ -2,15 +2,15 @@
 
 # rzuquim’s homelab scripts
 
-Scripts to learn `dev-ops` and setup my homelab.
+Scripts to learn `dev-ops` and setup my `homelab`.
 
 ## Local tests
 
-To simulate the production server we are using a _"Docker-in-Docker"_ (`DinD`) setup. Please,
-[read the docs](`docs/local_tests.md`) before proceeding.
+To simulate the production server we are using a virtual box VMs orchestrated by `vagrant`. Please,
+[read the docs](./docs/local_tests.md) before proceeding.
 
 ```bash
-cd ./test-env/
+cd ./test/
 # if not already built
 docker build --file test-env/dind.Dockerfile --tag dind:debian .
 docker run --privileged --rm -it dind:debian
