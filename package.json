@@ -2,7 +2,8 @@
   "name": "homelab",
   "type": "module",
   "scripts": {
-    "sandbox": "pushd test && bash ./sandbox.sh && popd",
-    "test": "pushd test && bash ./test.sh && popd"
+    "sandbox": "pushd test && bash ./sandbox-up.sh && popd",
+    "test": "pushd test && bash ./tests-run.sh && popd",
+    "test:no-clean": "pushd test && bash ./tests-run.sh --no-clean && popd"
   }
 }

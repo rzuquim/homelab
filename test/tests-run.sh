@@ -9,21 +9,39 @@ done
 TEST_BOX_NAME="test"
 TESTS_DIR="./tests"
 RESULT=0
+CLEAN_ENV=true
 
 export ANSIBLE_HOST_KEY_CHECKING=False
 
 declare -A PLAYBOOK_RUN_HISTORY=()
 declare -A PLAYBOOK_MAP=( \
-    ["01"]="../vps/install/docker.yml" \
-    ["02"]="../vps/install/gitea.yml" \
+    ["01"]="../vps/docker/docker.ansible.yml" \
+    ["02"]="../vps/gitea/gitea.ansible.yml" \
 )
+
+
+# Parsing args
+for arg in "$@"; do
+    case "$arg" in
+        --no-clean)
+            echo "eita!"
+            CLEAN_ENV=false
+            ;;
+        *)
+            echo "Unknown option: $arg"
+            exit 1
+            ;;
+    esac
+done
+
+# Ensuring pristine test environment
+clean
 
 # =====================================================
 echo -e "${VIOLET}🚀 Starting Test Environment...${NC}"
 # =====================================================
 
-# Ensure a clean environment by destroying any existing box first
-vagrant destroy -f $TEST_BOX_NAME > /dev/null 2>&1
+# NOTE: Ensure a clean environment by destroying any existing box first
 vagrant up $TEST_BOX_NAME
 
 ansible test -m ping
@@ -36,7 +54,7 @@ mapfile -t tests < <(find "$TESTS_DIR" -maxdepth 1 -name "*.sh" | sort)
 
 if [ ${#tests[@]} -eq 0 ]; then
     echo -e "${RED}⚠️  No tests found in $TESTS_DIR${NC}"
-    vagrant destroy -f $TEST_BOX_NAME
+    clean
     exit 1
 fi
 
@@ -72,9 +90,5 @@ for test_path in "${tests[@]}"; do
     fi
 done
 
-# =====================================================
-echo -e "${VIOLET}🧹 Destroying Test Environment...${NC}"
-# =====================================================
-vagrant destroy -f $TEST_BOX_NAME
-
+clean
 exit $RESULT
