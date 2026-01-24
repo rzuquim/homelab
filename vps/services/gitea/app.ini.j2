@@ -1,0 +1,25 @@
+[server]
+SSH_DOMAIN       = {{ inventory_hostname }}
+DOMAIN           = {{ inventory_hostname }}
+ROOT_URL         = {{ gitea_root_url }}
+HTTP_PORT        = 3000
+
+DISABLE_SSH      = false
+SSH_PORT         = 22
+SSH_LISTEN_PORT  = 2222
+START_SSH_SERVER = true
+# NOTE: This tells Gitea to prefix keys with the shim path
+SSH_CREATE_AUTHORIZED_KEYS_FILE  = true
+
+OFFLINE_MODE     = false
+
+[database]
+DB_TYPE  = sqlite3
+PATH     = /data/gitea.db
+
+[security]
+INSTALL_LOCK = true
+
+[repository]
+DISABLE_HTTP_GIT = true
+

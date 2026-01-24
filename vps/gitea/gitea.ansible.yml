@@ -1,0 +1,72 @@
+---
+- name: Gitea
+  hosts: all
+  become: true
+  vars:
+    gitea_dir: /opt/gitea
+    gitea_http_domain: "{{ inventory_hostname }}"
+    gitea_root_url: "http://{{ gitea_http_domain }}:3000/"
+
+  tasks:
+    - name: Create the git user
+      user:
+        name: git
+        home: /home/git
+        shell: /bin/bash
+
+    - name: Get git user info
+      getent:
+        database: passwd
+        key: git
+
+    - name: Generate SSH key for host git user
+      user:
+        name: git
+        generate_ssh_key: yes
+        ssh_key_bits: 4096
+        ssh_key_file: .ssh/id_rsa
+
+    - name: Create used directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: git
+        group: git
+      loop:
+        - "{{ gitea_dir }}"
+        - "{{ gitea_dir }}/data/gitea/conf"
+        - "/home/git/.ssh"
+
+    - name: Create .env file for Docker Compose
+      copy:
+        dest: "{{ gitea_dir }}/.env"
+        owner: git
+        group: git
+        content: |
+          GITEA_UID={{ getent_passwd['git'][1] }}
+          GITEA_GID={{ getent_passwd['git'][2] }}
+
+    - name: Deploy app.ini from template
+      template:
+        src: ./app.ini.j2
+        dest: "{{ gitea_dir }}/data/gitea/conf/app.ini"
+        owner: git
+        group: git
+
+    - name: Copy static docker-compose.yml
+      copy:
+        src: ./gitea.docker.yml
+        dest: "{{ gitea_dir }}/docker-compose.yml"
+
+    - name: Copy gitea-shell shim script
+      copy:
+        src: gitea-shell.sh
+        dest: /usr/local/bin/gitea-shell
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Start Gitea container
+      community.docker.docker_compose_v2:
+        project_src: "{{ gitea_dir }}"
+        state: present

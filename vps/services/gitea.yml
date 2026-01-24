@@ -1,0 +1,16 @@
+services:
+  server:
+    image: gitea/gitea:latest
+    container_name: gitea
+    restart: always
+    environment:
+      - USER_UID=${GITEA_UID}
+      - USER_GID=${GITEA_GID}
+    volumes:
+      - ./data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /home/git/.ssh:/data/git/.ssh
+    ports:
+      - "3000:3000"
+      - "2222:22"

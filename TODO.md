@@ -13,15 +13,30 @@
 
 ## Security
 
+- [ ] configure nginx to take care of https and adjust `gitea_root_url`
 - [ ] ufw rules
 - [ ] ansible with `(ALL) NOPASSWD: ALL` on sudoers does not seem the secure way to implement this
 - [ ] gitea using the host's SSH daemon (sshd)
 - [x] on tests, disable shared folders with `VAGRANT_DISABLE_VBOXSYMLINKCREATE=1`
-- [ ] disable HTTP on `gitea`
+- [x] disable HTTP on `gitea`
 
 ```
 [repository]
 DISABLE_HTTP_GIT = true
+```
+
+- [ ] more `gitea` security options
+
+```
+[security]
+INSTALL_LOCK = true
+SECRET_KEY = your-generated-secret-key
+INTERNAL_TOKEN = your-generated-internal-token
+
+[service]
+DISABLE_REGISTRATION = true
+REQUIRE_SIGNIN_VIEW = false
+ENABLE_CAPTCHA = true
 ```
 
 ## Docs
