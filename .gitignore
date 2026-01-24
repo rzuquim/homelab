@@ -1,1 +1,25 @@
+# test
 .vagrant
+
+# env
+.env
+.env*.local
+
+# js stuff
+node_modules/
+dist/
+npm-debug.*
+*.tsbuildinfo
+
+# build artifacts
+debug/
+target/
+*.pdb
+.cache
+
+# editors
+.idea/
+.vscode/
+
+# OS stuff
+.DS_Store

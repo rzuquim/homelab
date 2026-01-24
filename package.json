@@ -1,0 +1,8 @@
+{
+  "name": "homelab",
+  "type": "module",
+  "scripts": {
+    "sandbox": "pushd test && bash ./sandbox.sh && popd",
+    "test": "pushd test && bash ./test.sh && popd"
+  }
+}

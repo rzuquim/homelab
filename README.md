@@ -4,14 +4,13 @@
 
 Scripts to learn `dev-ops` and setup my `homelab`.
 
+We are using `node` to automate the activities.
+
 ## Local tests
 
 To simulate the production server we are using a virtual box VMs orchestrated by `vagrant`. Please,
 [read the docs](./docs/local_tests.md) before proceeding.
 
 ```bash
-cd ./test/
-# if not already built
-docker build --file test-env/dind.Dockerfile --tag dind:debian .
-docker run --privileged --rm -it dind:debian
+npm test
 ```
