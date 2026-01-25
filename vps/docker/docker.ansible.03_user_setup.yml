@@ -1,15 +1,3 @@
-- name: Gather docker user facts
-  become: yes
-  become_user: "{{ docker_user }}"
-  block:
-    - name: Get UID of docker user
-      command: id -u {{ docker_user }}
-      register: docker_uid
-
-    - name: Set user_id fact
-      set_fact:
-        docker_uid: "{{ docker_uid.stdout | trim }}"
-
 - name: Run Rootless Installation
   become: yes
   become_user: "{{ docker_user }}"
