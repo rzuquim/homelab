@@ -15,10 +15,10 @@
 
     - name: Create docker system user
       ansible.builtin.user:
-        name: "{{ docker_rootless_user }}"
+        name: "{{ docker_user }}"
         system: yes
         create_home: yes
-        home: "/home/{{ docker_rootless_user }}"
+        home: "/home/{{ docker_user }}"
         shell: /bin/bash
         password_lock: true
         state: present
@@ -32,8 +32,8 @@
     - name: Ensure subuid/gid ranges exist
       lineinfile:
         path: "/etc/{{ item }}"
-        line: "{{ docker_rootless_user }}:231072:65536"
-        regexp: "^{{ docker_rootless_user }}:"
+        line: "{{ docker_user }}:{{docker_subuid_range}}:65536"
+        regexp: "^{{ docker_user }}:"
         create: yes
       loop:
         - subuid

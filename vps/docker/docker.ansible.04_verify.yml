@@ -1,6 +1,6 @@
 - name: Verify docker installation
   become: yes
-  become_user: "{{ docker_rootless_user }}"
+  become_user: "{{ docker_user }}"
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ docker_uid }}"
     DOCKER_HOST: "unix:///run/user/{{ docker_uid }}/docker.sock"

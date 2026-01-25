@@ -2,8 +2,8 @@
 - name: Install rootless Docker
   hosts: all
 
-  vars:
-    docker_rootless_user: docker
+  vars_files:
+    - "../global_vars.yml"
 
   tasks:
     - import_tasks: docker.ansible.01_prerequisites.yml

@@ -1,9 +1,9 @@
 - name: Gather docker user facts
   become: yes
-  become_user: "{{ docker_rootless_user }}"
+  become_user: "{{ docker_user }}"
   block:
     - name: Get UID of docker user
-      command: id -u {{ docker_rootless_user }}
+      command: id -u {{ docker_user }}
       register: docker_uid
 
     - name: Set user_id fact
@@ -12,7 +12,8 @@
 
 - name: Run Rootless Installation
   become: yes
-  become_user: "{{ docker_rootless_user }}"
+  become_user: "{{ docker_user }}"
+  # TODO: check if this is needed
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ docker_uid }}"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ docker_uid }}/bus"

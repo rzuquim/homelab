@@ -51,6 +51,6 @@
         path: /var/run/docker.sock
 
     - name: Enable linger for user
-      command: "loginctl enable-linger {{ docker_rootless_user }}"
+      command: "loginctl enable-linger {{ docker_user }}"
       args:
-        creates: "/var/lib/systemd/linger/{{ docker_rootless_user }}"
+        creates: "/var/lib/systemd/linger/{{ docker_user }}"
