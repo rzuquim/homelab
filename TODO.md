@@ -36,3 +36,7 @@ DISABLE_HTTP_GIT = true
 ## Tests
 
 - [ ] why do tests calling `docker` needs `sudo` if the `ansible` user is on the `docker` group
+
+## Bugs
+
+- [ ] deal with `WARNINGS` on clean `docker.ansible.yml`

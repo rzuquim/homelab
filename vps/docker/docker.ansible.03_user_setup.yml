@@ -3,8 +3,7 @@
   become_user: "{{ docker_user }}"
   # TODO: check if this is needed
   environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ docker_uid }}"
-    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ docker_uid }}/bus"
+    XDG_RUNTIME_DIR: "{{ docker_runtime_dir }}"
   block:
     - name: Create environment configuration directory
       file:
