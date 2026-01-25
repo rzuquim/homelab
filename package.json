@@ -3,6 +3,7 @@
   "type": "module",
   "scripts": {
     "sandbox": "pushd test && bash ./sandbox-up.sh && popd",
+    "sandbox:destroy": "pushd test && vagrant destroy -f && popd",
     "test": "pushd test && bash ./tests-run.sh && popd",
     "test:no-clean": "pushd test && bash ./tests-run.sh --no-clean && popd"
   }
