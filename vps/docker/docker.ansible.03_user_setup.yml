@@ -15,7 +15,7 @@
     - name: Set DOCKER_HOST environment variable
       lineinfile:
         path: "~/.config/environment.d/docker.conf"
-        line: "DOCKER_HOST=unix:///run/user/{{ docker_uid }}/docker.sock"
+        line: "DOCKER_HOST={{ docker_sock_addr }}"
         create: yes
 
     - name: Run Docker rootless installation script
