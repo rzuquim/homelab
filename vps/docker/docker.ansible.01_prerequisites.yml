@@ -1,0 +1,45 @@
+- name: System setup
+  become: yes
+  block:
+    - name: Install prerequisite packages
+      apt:
+        pkg:
+          - ca-certificates
+          - curl
+          - gnupg
+          - uidmap
+          - dbus-user-session
+          - iptables
+        state: present
+        update_cache: yes
+
+    - name: Create docker system user
+      ansible.builtin.user:
+        name: "{{ docker_rootless_user }}"
+        system: yes
+        create_home: yes
+        home: "/home/{{ docker_rootless_user }}"
+        shell: /bin/bash
+        password_lock: true
+        state: present
+
+    - name: Create directory for Docker GPG key
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
+
+    - name: Ensure subuid/gid ranges exist
+      lineinfile:
+        path: "/etc/{{ item }}"
+        line: "{{ docker_rootless_user }}:231072:65536"
+        regexp: "^{{ docker_rootless_user }}:"
+        create: yes
+      loop:
+        - subuid
+        - subgid
+
+    - name: Load nf_tables kernel module
+      modprobe:
+        name: nf_tables
+        state: present

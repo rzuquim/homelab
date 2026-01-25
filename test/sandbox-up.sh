@@ -11,7 +11,7 @@ BOX_NAME="sandbox"
 export ANSIBLE_HOST_KEY_CHECKING=False
 
 STABLE_PLAYBOOKS=(
-  "../vps/install/docker.yml"
+  "../vps/docker/docker.ansible.yml"
 )
 
 # =====================================================

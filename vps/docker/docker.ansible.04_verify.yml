@@ -1,0 +1,34 @@
+- name: Verify docker installation
+  become: yes
+  become_user: "{{ docker_rootless_user }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ docker_uid }}"
+    DOCKER_HOST: "unix:///run/user/{{ docker_uid }}/docker.sock"
+  block:
+    - name: Verify Docker Rootless status
+      command: docker info
+      register: docker_info_output
+      changed_when: false
+
+    - name: Check for rootless markers in output
+      assert:
+        that:
+          - "'rootless' in docker_info_output.stdout"
+        fail_msg: "Docker does not appear to be running in rootless mode!"
+
+    - name: Check if Docker user service is active
+      command: systemctl --user is-active docker
+      register: docker_service_status
+      changed_when: false
+
+    - name: Report service status
+      debug:
+        msg: "Docker Rootless service is {{ docker_service_status.stdout }}"
+
+    - name: Run hello-world container
+      command: docker run --rm hello-world
+      register: hello_world_output
+
+    - name: Show hello-world output
+      debug:
+        var: hello_world_output.stdout_lines

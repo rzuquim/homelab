@@ -1,0 +1,43 @@
+- name: Gather docker user facts
+  become: yes
+  become_user: "{{ docker_rootless_user }}"
+  block:
+    - name: Get UID of docker user
+      command: id -u {{ docker_rootless_user }}
+      register: docker_uid
+
+    - name: Set user_id fact
+      set_fact:
+        docker_uid: "{{ docker_uid.stdout | trim }}"
+
+- name: Run Rootless Installation
+  become: yes
+  become_user: "{{ docker_rootless_user }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ docker_uid }}"
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ docker_uid }}/bus"
+  block:
+    - name: Create environment configuration directory
+      file:
+        path: "~/.config/environment.d"
+        state: directory
+        mode: "0700"
+
+    - name: Set DOCKER_HOST environment variable
+      lineinfile:
+        path: "~/.config/environment.d/docker.conf"
+        line: "DOCKER_HOST=unix:///run/user/{{ docker_uid }}/docker.sock"
+        create: yes
+
+    - name: Run Docker rootless installation script
+      command: dockerd-rootless-setuptool.sh install
+      args:
+        creates: ~/.config/systemd/user/docker.service
+
+    - name: Ensure systemd user instance is notified and service started
+      systemd:
+        name: docker
+        scope: user
+        state: started
+        enabled: yes
+        daemon_reload: yes
