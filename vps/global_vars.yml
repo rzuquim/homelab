@@ -2,6 +2,6 @@
 docker_user: docker
 docker_uid: 666
 docker_gid: 666
-docker_subuid_range: 10000
+docker_subuid_range: 300000
 docker_sock_addr: "unix:///run/user/{{ docker_uid }}/docker.sock"
 docker_runtime_dir: "/run/user/{{ docker_uid }}"

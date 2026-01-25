@@ -1,0 +1,20 @@
+# NOTE: from docs here:
+
+# NOTE: Instructions from https://docs.gitea.com/installation/install-with-docker-rootless/
+- name: Install gitea
+  hosts: all
+
+  vars_files:
+    - "../global_vars.yml"
+
+  vars:
+    gitea_container_uid: 1000
+    gitea_container_gid: 1000
+    gitea_ssh_user: git
+    gitea_dir: /home/{{ docker_user }}/opt/gitea
+    gitea_http_domain: "{{ inventory_hostname }}"
+    gitea_root_url: "http://{{ gitea_http_domain }}:3000/"
+
+  tasks:
+    - import_tasks: gitea.ansible.01_prerequisites.yml
+    - import_tasks: gitea.ansible.02_install.yml

@@ -1,0 +1,15 @@
+services:
+  server:
+    image: docker.gitea.com/gitea:1.25.4-rootless
+    restart: always
+    environment:
+      - USER_UID=${USER_UID}
+      - USER_GID=${USER_GID}
+    volumes:
+      - ./data:/var/lib/gitea
+      - ./config:/etc/gitea
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "2222:2222"

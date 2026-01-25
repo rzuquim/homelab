@@ -1,0 +1,48 @@
+- name: System prerequisites
+  become: yes
+  block:
+    - name: Create the gitea user (for shh passthrough)
+      user:
+        name: "{{ gitea_ssh_user }}"
+        home: "/home/{{ gitea_ssh_user }}"
+        shell: /usr/sbin/nologin
+
+    - name: Create .ssh dir
+      file:
+        path: "/home/{{ gitea_ssh_user }}/.ssh"
+        state: directory
+        owner: "{{ gitea_ssh_user }}"
+        group: "{{ gitea_ssh_user }}"
+
+    - name: Generate SSH key for host gitea user
+      user:
+        name: "{{ gitea_ssh_user }}"
+        generate_ssh_key: yes
+        ssh_key_bits: 4096
+        ssh_key_file: .ssh/id_rsa
+
+    - name: Create base directory (owned by docker)
+      file:
+        path: "{{ gitea_dir }}"
+        state: directory
+        owner: "{{ docker_user }}"
+        group: "{{ docker_user }}"
+
+    - name: Create service directories (owned by subrange user)
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ (docker_subuid_range | int) + (gitea_container_uid | int) }}"
+        group: "{{ (docker_subuid_range | int) + (gitea_container_gid | int) }}"
+      loop:
+        - "{{ gitea_dir }}/config"
+        - "{{ gitea_dir }}/data"
+
+    - name: Force container uid/gid
+      copy:
+        dest: "{{ gitea_dir }}/.env"
+        owner: "{{ docker_user }}"
+        group: "{{ docker_user }}"
+        content: |
+          USER_UID={{ gitea_container_uid }}
+          USER_GID={{ gitea_container_gid }}

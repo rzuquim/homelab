@@ -1,0 +1,21 @@
+- name: Copy docker assets
+  become: yes
+  block:
+    - name: Copy docker-compose.yml
+      copy:
+        src: ./gitea.docker-compose.yml
+        dest: "{{ gitea_dir }}/docker-compose.yml"
+        owner: "{{ docker_user }}"
+        group: "{{ docker_user }}"
+
+- name: Run gitea container
+  become: yes
+  become_user: "{{ docker_user }}"
+  environment:
+    XDG_RUNTIME_DIR: "{{ docker_runtime_dir }}"
+    DOCKER_HOST: "{{ docker_sock_addr }}"
+  block:
+    - name: Start gitea container
+      community.docker.docker_compose_v2:
+        project_src: "{{ gitea_dir }}"
+        state: present
