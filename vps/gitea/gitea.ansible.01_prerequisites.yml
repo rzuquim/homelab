@@ -32,8 +32,8 @@
       file:
         path: "{{ item }}"
         state: directory
-        owner: "{{ (docker_subuid_range | int) + (gitea_container_uid | int) }}"
-        group: "{{ (docker_subuid_range | int) + (gitea_container_gid | int) }}"
+        owner: "{{ (docker_subuid_range | int) + (gitea_container_uid | int) - 1 }}"
+        group: "{{ (docker_subuid_range | int) + (gitea_container_gid | int) - 1 }}"
       loop:
         - "{{ gitea_dir }}/config"
         - "{{ gitea_dir }}/data"

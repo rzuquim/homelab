@@ -2,9 +2,7 @@ services:
   server:
     image: docker.gitea.com/gitea:1.25.4-rootless
     restart: always
-    environment:
-      - USER_UID=${USER_UID}
-      - USER_GID=${USER_GID}
+    user: ${USER_UID}:${USER_GID}
     volumes:
       - ./data:/var/lib/gitea
       - ./config:/etc/gitea

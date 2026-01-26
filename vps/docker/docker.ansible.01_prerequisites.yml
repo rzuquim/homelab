@@ -51,3 +51,10 @@
       modprobe:
         name: nf_tables
         state: present
+
+    - name: Create volumes directory (owned by docker)
+      file:
+        path: "/volumes/"
+        state: directory
+        owner: "{{ docker_user }}"
+        group: "{{ docker_user }}"

@@ -11,7 +11,7 @@
     gitea_container_uid: 1000
     gitea_container_gid: 1000
     gitea_ssh_user: git
-    gitea_dir: /home/{{ docker_user }}/opt/gitea
+    gitea_dir: /volumes/gitea
     gitea_http_domain: "{{ inventory_hostname }}"
     gitea_root_url: "http://{{ gitea_http_domain }}:3000/"
 
