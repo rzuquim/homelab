@@ -36,7 +36,6 @@
         group: "{{ (docker_subuid_range | int) + (gitea_container_gid | int) - 1 }}"
       loop:
         - "{{ gitea_dir }}/config/"
-        - "{{ gitea_dir }}/config/conf/"
         - "{{ gitea_dir }}/data/"
 
     - name: Force container uid/gid

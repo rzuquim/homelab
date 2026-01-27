@@ -8,7 +8,7 @@ run_playbook() {
     echo -e "${YELLOW}\t📦 Running $playbook...${NC}"
     
     # We use -v (verbose) so you can see why a playbook fails in the logs
-    ansible-playbook "$playbook" --limit test
+    ansible-playbook "$playbook" --limit test -e "env=test"
     
     if [ $? -eq 0 ]; then
         PLAYBOOK_RUN_HISTORY[$pb_id]=true

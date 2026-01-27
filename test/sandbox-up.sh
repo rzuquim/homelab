@@ -29,6 +29,6 @@ echo -e "${VIOLET}📋 Running Stable Playbooks...${NC}"
 
 for playbook in "${STABLE_PLAYBOOKS[@]}"; do
     echo -e "${YELLOW}\t📦 Running $playbook...${NC}"
-    ansible-playbook "$playbook" --limit $BOX_NAME
+    ansible-playbook "$playbook" --limit $BOX_NAME -e "env=sandbox"
 done
 
