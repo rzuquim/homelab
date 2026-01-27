@@ -35,8 +35,9 @@
         owner: "{{ (docker_subuid_range | int) + (gitea_container_uid | int) - 1 }}"
         group: "{{ (docker_subuid_range | int) + (gitea_container_gid | int) - 1 }}"
       loop:
-        - "{{ gitea_dir }}/config"
-        - "{{ gitea_dir }}/data"
+        - "{{ gitea_dir }}/config/"
+        - "{{ gitea_dir }}/config/conf/"
+        - "{{ gitea_dir }}/data/"
 
     - name: Force container uid/gid
       copy:
@@ -46,3 +47,12 @@
         content: |
           USER_UID={{ gitea_container_uid }}
           USER_GID={{ gitea_container_gid }}
+
+    - name: Deploy app.ini from template
+      template:
+        src: "./gitea.app.ini"
+        # dest: "{{ gitea_dir }}/config/conf/app.ini"
+        dest: "{{ gitea_dir }}/config/app.ini"
+        # custom/conf/app.ini
+        owner: "{{ (docker_subuid_range | int) + (gitea_container_uid | int) - 1 }}"
+        group: "{{ (docker_subuid_range | int) + (gitea_container_gid | int) - 1 }}"

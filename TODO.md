@@ -3,21 +3,24 @@
 ## Features
 
 - [x] DinD image to simulate VPS
-- [ ] `vagrant` + `virtualbox` to simulate VPS
-- [ ] `ansible` to setup local test env
+- [x] `vagrant` + `virtualbox` to simulate VPS
+- [x] `ansible` to setup local test env
+- [x] docker rootless + gitea with docker compose
 - [ ] configure `docker` in `swarm mode` to declare services
 - [ ] `docker stack` to declare `gitea` service in single machine
 - [ ] add reverse proxy (`nginx`) to manage subdomain services
+- [ ] manage certs `https` and adjust gitea configs
 - [ ] hire Localweb VPS's first node and test everything
 - [ ] associate Cloudflare dns to VPS
+- [ ] gitea custom => robots.txt
 
 ## Security
 
-- [ ] ufw rules
+- [ ] ~ufw rules~ iptables
 - [ ] ansible with `(ALL) NOPASSWD: ALL` on sudoers does not seem the secure way to implement this
-- [ ] gitea using the host's SSH daemon (sshd)
+- [ ] gitea using the host's SSH daemon (sshd) passthrough
 - [x] on tests, disable shared folders with `VAGRANT_DISABLE_VBOXSYMLINKCREATE=1`
-- [ ] disable HTTP on `gitea`
+- [x] disable HTTP clone on `gitea`
 
 ```
 [repository]
@@ -35,7 +38,8 @@ DISABLE_HTTP_GIT = true
 
 ## Tests
 
-- [ ] why do tests calling `docker` needs `sudo` if the `ansible` user is on the `docker` group
+- [ ] why do tests calling `docker` needs `sudo` if the `ansible` user is on the `docker` group?
+- [ ] update tests to rootless docker
 
 ## Bugs
 
