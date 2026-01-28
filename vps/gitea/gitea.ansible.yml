@@ -17,7 +17,11 @@
     gitea_root_url: "{{ 'https://git.rzuquim.com' if env == 'prod' else 'http://192.168.56.10:3000/' }}"
     gitea_ssh_domain: "{{ 'git.rzuquim.com' if env == 'prod' else '192.168.56.10' }}"
     gitea_ssh_port: "{{ 22 if env == 'prod' else 2222 }}"
+    gitea_user: rzuquim
+    gitea_password: 123456
+    gitea_email: rzuquim@gmail.com
 
   tasks:
     - import_tasks: gitea.ansible.01_prerequisites.yml
     - import_tasks: gitea.ansible.02_install.yml
+    - import_tasks: gitea.ansible.03_setup.yml

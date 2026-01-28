@@ -1,0 +1,23 @@
+- name: First user setup
+  become: yes
+  become_user: "{{ docker_user }}"
+  environment:
+    XDG_RUNTIME_DIR: "{{ docker_runtime_dir }}"
+    DOCKER_HOST: "{{ docker_sock_addr }}"
+  block:
+    - name: Create admin user
+      community.docker.docker_container_exec:
+        container: gitea
+        command: >
+          /usr/local/bin/gitea admin user create 
+          --username {{ gitea_user }} 
+          --password {{ gitea_password }} 
+          --email {{ gitea_email }} 
+          --admin 
+          --must-change-password=false
+      register: gitea_user_creation
+      changed_when:
+        - gitea_user_creation.rc == 0
+      failed_when:
+        - gitea_user_creation.rc != 0
+        - "'user already exists' not in gitea_user_creation.stderr"

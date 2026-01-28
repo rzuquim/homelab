@@ -1,6 +1,7 @@
 services:
   server:
     image: docker.gitea.com/gitea:1.25.4-rootless
+    container_name: gitea
     restart: always
     user: ${USER_UID}:${USER_GID}
     volumes:
