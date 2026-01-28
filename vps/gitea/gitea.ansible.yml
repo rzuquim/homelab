@@ -22,3 +22,4 @@
     - import_tasks: gitea.ansible.01_prerequisites.yml
     - import_tasks: gitea.ansible.02_install.yml
     - import_tasks: gitea.ansible.03_setup.yml
+    # - import_tasks: gitea.ansible.04_ssh_passthrough.yml

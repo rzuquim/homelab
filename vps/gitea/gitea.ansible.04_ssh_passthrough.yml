@@ -1,0 +1,30 @@
+- name: Host prerequisites
+  become: yes
+  block:
+    - name: Create the gitea user (for shh passthrough)
+      user:
+        name: "{{ gitea_ssh_user }}"
+        home: "/home/{{ gitea_ssh_user }}"
+        shell: /usr/sbin/nologin
+
+    - name: Create .ssh dir
+      file:
+        path: "/home/{{ gitea_ssh_user }}/.ssh"
+        state: directory
+        owner: "{{ gitea_ssh_user }}"
+        group: "{{ gitea_ssh_user }}"
+
+    - name: Generate SSH key for host gitea user
+      user:
+        name: "{{ gitea_ssh_user }}"
+        generate_ssh_key: yes
+        ssh_key_bits: 4096
+        ssh_key_file: .ssh/id_rsa
+
+    - name: Create Gitea SSH shim script
+      copy:
+        dest: /usr/local/bin/gitea-shell
+        mode: "0755"
+        content: |
+          #!/bin/sh
+          ssh -p 2222 -o StrictHostKeyChecking=no git@localhost "SSH_ORIGINAL_COMMAND=\"$SSH_ORIGINAL_COMMAND\" $0 $@"
