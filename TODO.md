@@ -24,7 +24,6 @@
 - [x] on tests, disable shared folders with `VAGRANT_DISABLE_VBOXSYMLINKCREATE=1`
 - [x] disable HTTP clone on `gitea`
 - [x] adding gitea user's password on ansible vault
-- [ ] add random password to gitea db
 - [ ] move pvt keys inside `vault`
 
 ## Docs
