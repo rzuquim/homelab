@@ -6,13 +6,15 @@
 - [x] `vagrant` + `virtualbox` to simulate VPS
 - [x] `ansible` to setup local test env
 - [x] docker rootless + gitea with docker compose
-- [ ] configure `docker` in `swarm mode` to declare services
-- [ ] `docker stack` to declare `gitea` service in single machine
+- [ ] add public ssh key on default user
 - [ ] add reverse proxy (`nginx`) to manage subdomain services
 - [ ] manage certs `https` and adjust gitea configs
 - [ ] hire Localweb VPS's first node and test everything
 - [ ] associate Cloudflare dns to VPS
 - [ ] gitea custom => robots.txt
+- [ ] configure `docker` in `swarm mode` to declare services
+- [ ] `docker stack` to declare `gitea` service in single machine
+- [ ] and GPG on defaul user
 
 ## Security
 
@@ -21,11 +23,9 @@
 - [ ] gitea using the host's SSH daemon (sshd) passthrough
 - [x] on tests, disable shared folders with `VAGRANT_DISABLE_VBOXSYMLINKCREATE=1`
 - [x] disable HTTP clone on `gitea`
-
-```
-[repository]
-DISABLE_HTTP_GIT = true
-```
+- [x] adding gitea user's password on ansible vault
+- [ ] add random password to gitea db
+- [ ] move pvt keys inside `vault`
 
 ## Docs
 

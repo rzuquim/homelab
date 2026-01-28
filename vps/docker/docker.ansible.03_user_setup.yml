@@ -1,7 +1,6 @@
 - name: Run Rootless Installation
   become: yes
   become_user: "{{ docker_user }}"
-  # TODO: check if this is needed
   environment:
     XDG_RUNTIME_DIR: "{{ docker_runtime_dir }}"
   block:

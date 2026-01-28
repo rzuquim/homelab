@@ -29,6 +29,7 @@ echo -e "${VIOLET}📋 Running Stable Playbooks...${NC}"
 
 for playbook in "${STABLE_PLAYBOOKS[@]}"; do
     echo -e "${YELLOW}\t📦 Running $playbook...${NC}"
+    # NOTE: add --ask-vault-pass to test the sandbox with real secrets
     ansible-playbook "$playbook" --limit $BOX_NAME -e "env=sandbox"
 done
 

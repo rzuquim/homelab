@@ -6,20 +6,17 @@
 
   vars_files:
     - "../global_vars.yml"
+    - "{{ '../secrets.yml' if env == 'prod' else '../secrets_' ~ env ~ '.yml' }}"
 
   vars:
     gitea_container_uid: 1000
     gitea_container_gid: 1000
     gitea_ssh_user: git
-    # TODO: correct SSH domain
     gitea_dir: /volumes/gitea
     gitea_domain: "{{ 'git.rzuquim.com' if env == 'prod' else '192.168.56.10' }}"
     gitea_root_url: "{{ 'https://git.rzuquim.com' if env == 'prod' else 'http://192.168.56.10:3000/' }}"
     gitea_ssh_domain: "{{ 'git.rzuquim.com' if env == 'prod' else '192.168.56.10' }}"
     gitea_ssh_port: "{{ 22 if env == 'prod' else 2222 }}"
-    gitea_user: rzuquim
-    gitea_password: 123456
-    gitea_email: rzuquim@gmail.com
 
   tasks:
     - import_tasks: gitea.ansible.01_prerequisites.yml
