@@ -6,15 +6,20 @@
 - [x] `vagrant` + `virtualbox` to simulate VPS
 - [x] `ansible` to setup local test env
 - [x] docker rootless + gitea with docker compose
-- [ ] add public ssh key on default user
-- [ ] add reverse proxy (`nginx`) to manage subdomain services
-- [ ] manage certs `https` and adjust gitea configs
+- [x] add reverse proxy (`nginx`) to manage subdomain services
+- [ ] add `ansible` public ssh key on server
+- `nginx`
+  - [ ] manage certs `https` and adjust gitea configs
+  - [ ] robots.txt
+  - [ ] 
+- `gitea`
+  - [ ] add public ssh key on default user
+  - [ ] and GPG on defaul user
 - [ ] hire Localweb VPS's first node and test everything
 - [ ] associate Cloudflare dns to VPS
-- [ ] gitea custom => robots.txt
-- [ ] configure `docker` in `swarm mode` to declare services
-- [ ] `docker stack` to declare `gitea` service in single machine
-- [ ] and GPG on defaul user
+- `docker`
+  - [ ] configure `docker` in `swarm mode` to declare services
+  - [ ] `docker stack` to declare `gitea` service in single machine
 
 ## Security
 
@@ -28,7 +33,7 @@
 - [ ] check: https://github.com/olivomarco/my-ansible-linux-setup
 - [ ] check: https://dev-sec.io/
 - [x] disable `nginx` welcome page
-- [ ] custom error pages
+- [x] custom error pages
 - [ ] forward 403 to 404 page
 - [ ] https only
 - [ ] external validation (some YT video)

@@ -7,8 +7,14 @@
         dest: "/etc/nginx/conf.d/{{ item.name }}.conf"
       loop: "{{ nginx_sites }}"
 
-    - name: Deploy main configuration
+    - name: Custom error page
       copy:
+        dest: "/var/www/html/error.html"
+        src: "./error.html"
+      notify: reload_nginx
+
+    - name: Deploy main configuration
+      template:
         dest: "/etc/nginx/nginx.conf"
         src: "./nginx.conf"
       notify: reload_nginx
