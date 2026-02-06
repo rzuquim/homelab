@@ -12,3 +12,5 @@ gitea_root_url: "https://git.rzuquim.com"
 gitea_ssh_domain: "git.rzuquim.com"
 # TODO: support ssh passthrough
 gitea_ssh_port: 2222
+
+blog_root_url: "https://blog.rzuquim.com"
