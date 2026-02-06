@@ -25,6 +25,14 @@
 - [x] disable HTTP clone on `gitea`
 - [x] adding gitea user's password on ansible vault
 - [ ] move pvt keys inside `vault`
+- [ ] check: https://github.com/olivomarco/my-ansible-linux-setup
+- [ ] check: https://dev-sec.io/
+- [x] disable `nginx` welcome page
+- [ ] custom error pages
+- [ ] forward 403 to 404 page
+- [ ] https only
+- [ ] external validation (some YT video)
+- [ ] block 3000 port (no access but through nginx)
 
 ## Docs
 
@@ -37,6 +45,7 @@
 
 ## Tests
 
+- [ ] support DNS on tests
 - [ ] why do tests calling `docker` needs `sudo` if the `ansible` user is on the `docker` group?
 - [ ] update tests to rootless docker
 

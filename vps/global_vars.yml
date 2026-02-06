@@ -5,3 +5,10 @@ docker_gid: 666
 docker_subuid_range: 300000
 docker_sock_addr: "unix:///run/user/{{ docker_uid }}/docker.sock"
 docker_runtime_dir: "/run/user/{{ docker_uid }}"
+
+# WARN: when testing locally on `sandbox` I am adding the following section to my `/etc/hosts`
+gitea_domain: "git.rzuquim.com"
+gitea_root_url: "https://git.rzuquim.com"
+gitea_ssh_domain: "git.rzuquim.com"
+# TODO: support ssh passthrough
+gitea_ssh_port: 2222

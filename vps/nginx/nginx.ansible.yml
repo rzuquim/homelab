@@ -1,0 +1,25 @@
+# NOTE: Instructions from https://docs.gitea.com/installation/install-with-docker-rootless/
+- name: Install gitea
+  hosts: all
+  become: yes
+
+  vars_files:
+    - "../global_vars.yml"
+    - "{{ '../secrets.yml' if env == 'prod' else '../secrets_' ~ env ~ '.yml' }}"
+
+  vars:
+    nginx_static_files_domain: cdn.rzuquim.com
+    nginx_sites:
+      - { name: "gitea", template: "nginx.gitea.conf" }
+      - { name: "cdn", template: "nginx.cdn.conf" }
+
+  tasks:
+    - import_tasks: nginx.ansible.01_prerequisites.yml
+    - import_tasks: nginx.ansible.02_install.yml
+    - import_tasks: nginx.ansible.03_config.yml
+
+  handlers:
+    - name: reload_nginx
+      service:
+        name: nginx
+        state: reloaded

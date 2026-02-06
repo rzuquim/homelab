@@ -13,6 +13,7 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 STABLE_PLAYBOOKS=(
   "../vps/docker/docker.ansible.yml"
   "../vps/gitea/gitea.ansible.yml"
+  "../vps/nginx/nginx.ansible.yml"
 )
 
 # =====================================================

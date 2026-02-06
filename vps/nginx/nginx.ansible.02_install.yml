@@ -1,0 +1,17 @@
+- name: Install Nginx and setup dirs
+
+  block:
+    - name: Install Nginx and setup dirs
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Ensure CDN directory exists
+      file:
+        path: /var/www/cdn
+        state: directory
+        # NOTE: it is expected that nginx installer will create this user
+        owner: www-data
+        group: www-data
+        mode: "0755"

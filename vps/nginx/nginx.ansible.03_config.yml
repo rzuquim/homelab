@@ -1,0 +1,14 @@
+- name: Config nginx sites
+
+  block:
+    - name: Deploy site configurations
+      template:
+        src: "{{ item.template }}"
+        dest: "/etc/nginx/conf.d/{{ item.name }}.conf"
+      loop: "{{ nginx_sites }}"
+
+    - name: Deploy main configuration
+      copy:
+        dest: "/etc/nginx/nginx.conf"
+        src: "./nginx.conf"
+      notify: reload_nginx
