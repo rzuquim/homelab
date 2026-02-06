@@ -1,9 +1,15 @@
-- name: Install Nginx and setup dirs
+- name: Install nginx and setup dirs
 
   block:
-    - name: Install Nginx and setup dirs
+    - name: Install nginx and setup dirs
       apt:
         name: nginx
+        state: present
+        update_cache: yes
+
+    - name: nginx module to hide server headers
+      apt:
+        name: libnginx-mod-http-headers-more-filter
         state: present
         update_cache: yes
 
