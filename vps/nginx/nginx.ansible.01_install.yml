@@ -15,9 +15,10 @@
 
     - name: Ensure CDN directory exists
       file:
-        path: /var/www/cdn
+        path: "{{ item }}"
         state: directory
         # NOTE: it is expected that nginx installer will create this user
         owner: www-data
         group: www-data
         mode: "0755"
+      loop: "{{ nginx_folders }}"

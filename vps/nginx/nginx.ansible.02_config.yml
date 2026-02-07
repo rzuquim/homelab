@@ -5,16 +5,22 @@
       template:
         src: "{{ item.template }}"
         dest: "/etc/nginx/conf.d/{{ item.name }}.conf"
+        owner: www-data
+        group: www-data
       loop: "{{ nginx_sites }}"
 
     - name: Custom error page
       copy:
         dest: "/var/www/html/error.html"
         src: "./error.html"
+        owner: www-data
+        group: www-data
       notify: reload_nginx
 
     - name: Deploy main configuration
       template:
         dest: "/etc/nginx/nginx.conf"
         src: "./nginx.conf"
+        owner: www-data
+        group: www-data
       notify: reload_nginx

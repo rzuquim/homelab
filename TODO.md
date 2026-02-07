@@ -11,7 +11,7 @@
 - `nginx`
   - [ ] manage certs `https` and adjust gitea configs
   - [ ] robots.txt
-  - [ ] 
+  - [ ]
 - `gitea`
   - [ ] add public ssh key on default user
   - [ ] and GPG on defaul user
@@ -34,10 +34,16 @@
 - [ ] check: https://dev-sec.io/
 - [x] disable `nginx` welcome page
 - [x] custom error pages
-- [ ] forward 403 to 404 page
-- [ ] https only
-- [ ] external validation (some YT video)
-- [ ] block 3000 port (no access but through nginx)
+- `nginx`
+  - [x] forward 403 to 404 page
+  - [ ] https only
+  - [x] external validation (some YT video)
+  - [ ] block 3000 port (no access but through nginx)
+  - [ ] review CSP and security headers
+  - [ ] missing proxy hardening on `./vps/nginx/nginx.gitea.conf`
+  - [ ] global timeouts
+  - [ ] limit CDN methods
+  - [ ] disable directory traversal attempts
 
 ## Docs
 
@@ -57,3 +63,4 @@
 ## Bugs
 
 - [ ] deal with `WARNINGS` on clean `docker.ansible.yml`
+- [ ] deal with MIME types warns on `nginx`

@@ -12,11 +12,14 @@
     nginx_sites:
       - { name: "gitea", template: "nginx.gitea.conf" }
       - { name: "cdn", template: "nginx.cdn.conf" }
+    nginx_folders:
+      - /var/www/html
+      - /var/www/cdn
 
   tasks:
-    - import_tasks: nginx.ansible.01_prerequisites.yml
-    - import_tasks: nginx.ansible.02_install.yml
-    - import_tasks: nginx.ansible.03_config.yml
+    - import_tasks: nginx.ansible.01_install.yml
+    - import_tasks: nginx.ansible.02_config.yml
+    - import_tasks: nginx.ansible.03_cdn.yml
 
   handlers:
     - name: reload_nginx

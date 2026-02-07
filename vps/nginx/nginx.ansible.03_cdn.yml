@@ -1,0 +1,8 @@
+- name: nginx served assets
+  block:
+    - name: Ansible pub-key
+      copy:
+        dest: "/var/www/cdn/ansible_key.pub"
+        src: "../ansible_key.pub"
+        owner: www-data
+        group: www-data

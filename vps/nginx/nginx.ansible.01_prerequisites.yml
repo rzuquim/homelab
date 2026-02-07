@@ -1,3 +1,0 @@
-- name: Nginx prerequisites
-  debug:
-    msg: No prerequisites to install nginx
