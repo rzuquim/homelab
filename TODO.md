@@ -12,7 +12,7 @@
   - [ ] manage certs `https` and adjust gitea configs
   - [x] robots.txt
   - [ ] rate limit
-  - [ ] global favico
+  - [x] global favico
 - `gitea`
   - [ ] add public ssh key on default user
   - [ ] and GPG on defaul user
