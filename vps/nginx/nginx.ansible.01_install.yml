@@ -1,7 +1,7 @@
 - name: Install nginx and setup dirs
 
   block:
-    - name: Install nginx and setup dirs
+    - name: Install nginx
       apt:
         name: nginx
         state: present

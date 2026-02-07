@@ -1,0 +1,7 @@
+- name: Install iptables
+
+  block:
+    - name: Install iptables
+      apt:
+        name: nginx
+        state: present

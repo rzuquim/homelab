@@ -7,7 +7,7 @@
 - [x] `ansible` to setup local test env
 - [x] docker rootless + gitea with docker compose
 - [x] add reverse proxy (`nginx`) to manage subdomain services
-- [ ] add `ansible` public ssh key on server
+- [x] add `ansible` public ssh key on server
 - `nginx`
   - [ ] manage certs `https` and adjust gitea configs
   - [x] robots.txt
@@ -16,15 +16,15 @@
   - [ ] add public ssh key on default user
   - [ ] and GPG on defaul user
 - [ ] hire Localweb VPS's first node and test everything
-- [ ] associate Cloudflare dns to VPS
+- [ ] associate Cloudflare DNS to VPS
 - `docker`
   - [ ] configure `docker` in `swarm mode` to declare services
   - [ ] `docker stack` to declare `gitea` service in single machine
 
 ## Security
 
-- [ ] ~ufw rules~ iptables
-- [ ] ansible with `(ALL) NOPASSWD: ALL` on sudoers does not seem the secure way to implement this
+- [x] ~ufw rules~ iptables
+- [ ] `ansible` with `(ALL) NOPASSWD: ALL` on sudoers does not seem the secure way to implement this
 - [ ] gitea using the host's SSH daemon (sshd) passthrough
 - [x] on tests, disable shared folders with `VAGRANT_DISABLE_VBOXSYMLINKCREATE=1`
 - [x] disable HTTP clone on `gitea`
@@ -38,7 +38,7 @@
   - [x] forward 403 to 404 page
   - [x] https only
   - [x] external validation (some YT video)
-  - [ ] block 3000 port (no access but through nginx)
+  - [x] block 3000 port (no access but through nginx)
   - [ ] cache on cdn
   - [x] review CSP and security headers
   - [x] missing proxy hardening on `./vps/nginx/nginx.gitea.conf`

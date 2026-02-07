@@ -1,0 +1,20 @@
+- name: Setup firewall
+  hosts: all
+  become: yes
+
+  vars_files:
+    - "../global_vars.yml"
+
+  vars:
+    ipv6_sysctl:
+      - net.ipv6.conf.all.disable_ipv6
+      - net.ipv6.conf.default.disable_ipv6
+      - net.ipv6.conf.lo.disable_ipv6
+
+  tasks:
+    - import_tasks: ./iptables.ansible.01_install.yml
+    - import_tasks: ./iptables.ansible.02_config.yml
+
+  handlers:
+    - name: restore_iptables
+      command: iptables-restore /etc/iptables.rules
