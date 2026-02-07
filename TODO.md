@@ -12,6 +12,7 @@
   - [ ] manage certs `https` and adjust gitea configs
   - [x] robots.txt
   - [ ] rate limit
+  - [ ] global favico
 - `gitea`
   - [ ] add public ssh key on default user
   - [ ] and GPG on defaul user
@@ -39,7 +40,7 @@
   - [x] https only
   - [x] external validation (some YT video)
   - [x] block 3000 port (no access but through nginx)
-  - [ ] cache on cdn
+  - [x] cache on cdn
   - [x] review CSP and security headers
   - [x] missing proxy hardening on `./vps/nginx/nginx.gitea.conf`
   - [x] global timeouts
