@@ -69,4 +69,4 @@ curl -I -A "GPTBot" http://blog.rzuquim.com
 ## Bugs
 
 - [ ] deal with `WARNINGS` on clean `docker.ansible.yml`
-- [ ] deal with MIME types warns on `nginx`
+- [x] deal with MIME types warns on `nginx`
