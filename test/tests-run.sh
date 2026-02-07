@@ -17,6 +17,7 @@ declare -A PLAYBOOK_RUN_HISTORY=()
 declare -A PLAYBOOK_MAP=( \
     ["01"]="../vps/docker/docker.ansible.yml" \
     ["02"]="../vps/gitea/gitea.ansible.yml" \
+    ["03"]="../vps/nginx/nginx.ansible.yml" \
 )
 
 
