@@ -36,9 +36,10 @@
 - [x] custom error pages
 - `nginx`
   - [x] forward 403 to 404 page
-  - [ ] https only
+  - [x] https only
   - [x] external validation (some YT video)
   - [ ] block 3000 port (no access but through nginx)
+  - [ ] cache on cdn
   - [x] review CSP and security headers
   - [x] missing proxy hardening on `./vps/nginx/nginx.gitea.conf`
   - [x] global timeouts

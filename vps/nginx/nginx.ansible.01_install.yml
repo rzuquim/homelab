@@ -22,3 +22,23 @@
         group: www-data
         mode: "0755"
       loop: "{{ nginx_folders }}"
+
+    - name: Ensure cert directory exists
+      file:
+        path: /etc/nginx/certs
+        owner: www-data
+        group: www-data
+        state: directory
+        mode: "0700"
+
+    - name: Generate self-signed wildcard cert (on DEBUG)
+      become_user: "www-data"
+      command: >
+        openssl req -x509 -nodes -newkey rsa:4096 
+        -keyout /etc/nginx/certs/wildcard.privkey.pem 
+        -out /etc/nginx/certs/wildcard.fullchain.pem 
+        -days 365 -subj "/CN=*.rzuquim.com"
+      args:
+        creates: /etc/nginx/certs/wildcard.fullchain.pem
+      when: env != 'prod'
+      notify: reload_nginx
