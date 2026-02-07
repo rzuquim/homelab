@@ -39,7 +39,7 @@
   - [ ] https only
   - [x] external validation (some YT video)
   - [ ] block 3000 port (no access but through nginx)
-  - [ ] review CSP and security headers
+  - [x] review CSP and security headers
   - [x] missing proxy hardening on `./vps/nginx/nginx.gitea.conf`
   - [x] global timeouts
   - [x] limit CDN methods
