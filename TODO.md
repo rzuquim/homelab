@@ -42,7 +42,7 @@
   - [ ] review CSP and security headers
   - [ ] missing proxy hardening on `./vps/nginx/nginx.gitea.conf`
   - [ ] global timeouts
-  - [ ] limit CDN methods
+  - [x] limit CDN methods
   - [ ] disable directory traversal attempts
 
 ## Docs
