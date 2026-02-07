@@ -41,7 +41,7 @@
   - [ ] block 3000 port (no access but through nginx)
   - [ ] review CSP and security headers
   - [ ] missing proxy hardening on `./vps/nginx/nginx.gitea.conf`
-  - [ ] global timeouts
+  - [x] global timeouts
   - [x] limit CDN methods
   - [x] block directory traversal attempts
 
