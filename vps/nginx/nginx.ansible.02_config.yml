@@ -9,10 +9,17 @@
         group: www-data
       loop: "{{ nginx_sites }}"
 
-    - name: Custom error page
+    - name: Deploy config snippets
       copy:
-        dest: "/var/www/html/error.html"
-        src: "./error.html"
+        src: "./snippets/"
+        dest: "/etc/nginx/snippets/"
+        owner: www-data
+        group: www-data
+
+    - name: Copying HTML assets
+      copy:
+        src: "./html/"
+        dest: "/var/www/html/"
         owner: www-data
         group: www-data
       notify: reload_nginx

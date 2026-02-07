@@ -10,8 +10,8 @@
 - [ ] add `ansible` public ssh key on server
 - `nginx`
   - [ ] manage certs `https` and adjust gitea configs
-  - [ ] robots.txt
-  - [ ]
+  - [x] robots.txt
+  - [ ] rate limit
 - `gitea`
   - [ ] add public ssh key on default user
   - [ ] and GPG on defaul user
@@ -59,6 +59,12 @@
 - [ ] support DNS on tests
 - [ ] why do tests calling `docker` needs `sudo` if the `ansible` user is on the `docker` group?
 - [ ] update tests to rootless docker
+- [ ] test robots.txt
+
+```
+curl -I -A "Googlebot/2.1 (+http://www.google.com/bot.html)" http://blog.rzuquim.com
+curl -I -A "GPTBot" http://blog.rzuquim.com
+```
 
 ## Bugs
 
