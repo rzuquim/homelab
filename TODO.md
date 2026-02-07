@@ -43,7 +43,7 @@
   - [ ] missing proxy hardening on `./vps/nginx/nginx.gitea.conf`
   - [ ] global timeouts
   - [x] limit CDN methods
-  - [ ] disable directory traversal attempts
+  - [x] block directory traversal attempts
 
 ## Docs
 
