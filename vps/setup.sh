@@ -18,6 +18,7 @@ function create_user() {
     fi
 
     useradd -m -s /bin/bash "$USER_NAME"
+    passwd -l "$ANSIBLE_USER"
 
     echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USER_NAME
     chmod 0440 /etc/sudoers.d/$USER_NAME
@@ -34,7 +35,9 @@ function create_user() {
     chown -R "$USER_NAME:$USER_NAME" "$HOME_DIR/.ssh"
 }
 
+# ------------------------------------------------------------
 # Installing basic tools
+# ------------------------------------------------------------
 apt-get update && apt-get install -y \
     python3 \
     sudo \
