@@ -1,0 +1,20 @@
+- name: Ensuring safe SSH
+  become: yes
+
+  block:
+    - name: SSH config
+      template:
+        src: "./sshd_config"
+        dest: "/etc/ssh/sshd_config"
+
+    - name: Validate sshd configuration
+      command: sshd -t
+      register: sshd_test
+      changed_when: false
+      failed_when: sshd_test.rc != 0
+
+    - name: Restart sshd service
+      systemd:
+        name: sshd
+        state: restarted
+      when: sshd_test.rc == 0

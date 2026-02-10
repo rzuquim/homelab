@@ -1,0 +1,13 @@
+- name: Security setup
+  hosts: all
+  become: yes
+
+  vars_files:
+    - "../global_vars.yml"
+    - "{{ '../secrets.yml' if env == 'prod' else '../secrets_' ~ env ~ '.yml' }}"
+
+  vars:
+    sshd_users: "{{ 'admin ansible' if env == 'prod' else 'vagrant ansible' }}"
+
+  tasks:
+    - import_tasks: security.ansible.01_sshd.yml

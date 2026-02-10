@@ -15,6 +15,7 @@ STABLE_PLAYBOOKS=(
   "../vps/gitea/gitea.ansible.yml"
   "../vps/nginx/nginx.ansible.yml"
   "../vps/firewall/iptables.ansible.yml"
+  "../vps/security/security.ansible.yml"
 )
 
 # =====================================================

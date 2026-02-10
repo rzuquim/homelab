@@ -70,5 +70,6 @@ curl -I -A "GPTBot" http://blog.rzuquim.com
 
 ## Bugs
 
-- [ ] deal with `WARNINGS` on clean `docker.ansible.yml`
+- [ ] deal with `WARNINGS` on clean `Set DOCKER_HOST environment variable`
 - [x] deal with MIME types warns on `nginx`
+- [ ] deal with `WARNING` on clean `Disable IPv6 (all)`
