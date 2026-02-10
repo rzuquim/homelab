@@ -6,6 +6,7 @@
         name: "{{ gitea_ssh_user }}"
         home: "/home/{{ gitea_ssh_user }}"
         shell: /usr/sbin/nologin
+        password_lock: yes
 
     - name: Create .ssh dir
       file:

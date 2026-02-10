@@ -14,7 +14,7 @@
         mode: "0644"
 
     - name: Add Docker repository to apt sources (DEB822 format)
-      ansible.builtin.deb822_repository:
+      deb822_repository:
         name: docker
         types: [deb]
         uris: https://download.docker.com/linux/debian
@@ -46,7 +46,7 @@
         - docker.socket
 
     - name: Delete docker.sock
-      ansible.builtin.file:
+      file:
         state: absent
         path: /var/run/docker.sock
 

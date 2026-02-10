@@ -14,13 +14,13 @@
         update_cache: yes
 
     - name: Create docker group
-      ansible.builtin.group:
+      group:
         name: "{{ docker_user }}"
         gid: "{{ docker_gid }}"
         state: present
 
     - name: Create docker system user
-      ansible.builtin.user:
+      user:
         name: "{{ docker_user }}"
         system: yes
         uid: "{{ docker_uid }}"
